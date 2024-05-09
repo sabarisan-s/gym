@@ -29,13 +29,13 @@ const Features = () => {
     ];
     return (
         <>
-        <h1 className="my-4 font-extralight text-4xl text-center">Our Features</h1>
+        <h1 className="text-center text-5xl my-5 font-semibold">Our Features</h1>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4">
 
             {featuresData.map((item, i) => (
                 <div
                     key={i}
-                    className="flex items-center flex-col justify-center border bg-red-600 lg:mx-4 mx-5 my-5"
+                    className="flex items-center h-52 flex-col shadow-lg justify-center border bg-red-600 lg:mx-4 mx-5 my-5"
                 >
                     <img src={item.icon} alt="" className="mt-4" />
                     <h3 className="text-black font-bold my-2">

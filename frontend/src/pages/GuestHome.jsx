@@ -5,6 +5,7 @@ import Features from "../components/Section/Features";
 import HomeAbout from "../components/Section/HomeAbout";
 import Discount from "../components/Section/Discount";
 import OurPackage from "../components/Section/OurPackage";
+import Footer from "../components/Footer/Footer";
 
 const GuestHome = () => {
     return (
@@ -15,6 +16,7 @@ const GuestHome = () => {
             <HomeAbout />
             <OurPackage />
             <Discount />
+            <Footer/>
         </>
     );
 };

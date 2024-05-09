@@ -40,9 +40,9 @@ const SlideImg = () => {
                     style={{ transform: `translateX(-${slideCount * 100}%)` }}
                 >
                     {slideData.map((item, i) => (
-                        <div className="min-w-full min-h-96 " key={i}>
+                        <div className="min-w-full min-h-[40rem] " key={i}>
                             <div
-                                className=" min-h-96 text-center flex flex-col justify-center items-center "
+                                className=" min-h-[40rem] text-center flex flex-col justify-center items-center "
                                 style={{
                                     background: `url(${item.img}) no-repeat `,
                                     backgroundSize: "cover",
@@ -64,7 +64,7 @@ const SlideImg = () => {
                         </div>
                     ))}
                 </div>
-                <div className="absolute inset-0 w-full flex justify-between">
+                <div className="absolute hidden  inset-0 w-full sm:flex justify-between ">
                     <button onClick={() => preSlide()} className="text-4xl">
                         ◀
                     </button>
@@ -75,7 +75,7 @@ const SlideImg = () => {
                 <div className="absolute bottom-0 flex justify-center items-center w-full gap-2">
                     {slideData.map((_, i) => (
                         <span
-                            onClick={() => setSlideCount(i)}
+                            onClick={() => setSlideCount(i) }key={i}
                             className={` bg-white rounded-full ${
                                 slideCount === i
                                     ? "p-2 bg-white"

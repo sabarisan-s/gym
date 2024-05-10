@@ -7,105 +7,54 @@ const mongoose = require("mongoose");
 const auth = require("./auth");
 const userModel = require("./models/userModel");
 const jwt = require("jsonwebtoken");
+const bookingModel = require("./models/bookingModel");
 
 app.use(cors());
 app.use(express.json());
 app.use("/", require("./routers/userRoute"));
 
-// app.post("/signup", async (req, res) => {
-//     const { name, phone, email, password } = req.body;
-//     if (!name || !phone || !email || !password) {
-//         return res
-//             .status(400)
-//             .json({ error: true, message: "Fill * required" });
-//     }
+app.post("/booking", auth, async (req, res) => {
+    const { user } = req.user;
 
-//     const phonePattern = /^[\d]{10}$/;
-//     if (!phonePattern.test(phone)) {
-//         return res
-//             .status(400)
-//             .json({ error: true, message: "Phone not valid" });
-//     }
+    const { package, duration, stage, price } = req.body;
+    if (!package || !duration || !stage || !price) {
+        return res
+            .status(400)
+            .json({ error: true, message: "Fill * required" });
+    }
 
-//     const emailPattern = /^[\w]+@[\w]+.[\w]+$/;
-//     if (!emailPattern.test(email)) {
-//         return res
-//             .status(400)
-//             .json({ error: true, message: "Email wrong pattern" });
-//     }
+    const userCheck = await userModel.findOne({ _id: user._id });
+    if (!userCheck) {
+        return res.status(400).json({ error: true, message: "Not a User" });
+    }
 
-//     const checkEmail = await userModel.findOne({ email });
-//     if (checkEmail) {
-//         return res
-//             .status(400)
-//             .json({ error: true, message: "Email already taken" });
-//     }
+    const userBooking = await bookingModel.create({
+        package,
+        duration,
+        stage,
+        price,
+        userId: user._id,
+    });
 
-//     if (password.length < 8) {
-//         return res
-//             .status(400)
-//             .json({ error: true, message: "password min 8 character" });
-//     }
+    res.status(201).json({
+        userBooking,
+        error: false,
+        message: "Booking successful!",
+    });
+});
 
-//     const genSalt = await bcryptjs.genSalt(9);
-//     const hashedPassword = await bcryptjs.hash(password, genSalt);
-//     const user = await userModel.create({
-//         ...req.body,
-//         password: hashedPassword,
-//     });
-//     const token = jwt.sign({ user }, process.env.SECRET_KEY);
-//     res.status(201).json({
-//         user,
-//         token,
-//         error: false,
-//         message: "SignUp successful!",
-//     });
-// });
 
-// app.post("/login", async (req, res) => {
-//     const { email, password } = req.body;
-//     if (!email || !password) {
-//         return res
-//             .status(400)
-//             .json({ error: true, message: "Fill * required" });
-//     }
-
-//     const emailPattern = /^[\w]+@[\w]+.[\w]+$/;
-//     if (!emailPattern.test(email)) {
-//         return res
-//             .status(400)
-//             .json({ error: true, message: "Email wrong pattern" });
-//     }
-
-//     const user = await userModel.findOne({ email });
-//     if (!user) {
-//         return res.status(400).json({ error: true, message: "User not found" });
-//     }
-
-//     const checkPassword = await bcryptjs.compare(password, user.password);
-//     if (!checkPassword) {
-//         return res.status(400).json({ error: true, message: "Wrong password" });
-//     }
-//     const token = jwt.sign({ user }, process.env.SECRET_KEY);
-//     res.status(201).json({
-//         user,
-//         token,
-//         error: false,
-//         message: "Login Successful!",
-//     });
-// });
-
-// app.get("/user", auth, async (req, res, next) => {
-//     const { user } = req.user;
-//     console.log(user);
-//     const isUser = await userModel.findOne({ _id: user._id });
-//     if (!isUser) {
-//         return res
-//             .status(401)
-//             .json({ error: true, message: " User not found " });
-//     }
-//     res.json({ user, error: false, message: "" });
-// });
+app.get("/getuserbooking", auth, async (req, res, next) => {
+    const { user } = req.user;
+    console.log(user);
+    const userBooking = await bookingModel.findOne({ userId: user._id, });
+    if (!userBooking) {
+        return res
+            .status(401)
+            .json({ error: true, message: " User not found " });
+    }
+    res.json({ userBooking, error: false, message: "" });
+});
 
 mongoose
     .connect(process.env.MONGODB_URL)

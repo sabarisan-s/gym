@@ -4,10 +4,10 @@ const HomeAbout = () => {
     return (
         <div className="flex flex-col sm:flex-row px-5 items-center justify-center">
   
-            <div class="sm:w-1/2 flex-grow flex-shrink-0">
+            <div className="sm:w-1/2 flex-grow flex-shrink-0">
                 <img src={HomeAboutImg} alt="" />
             </div>
-            <div class="sm:w-2/3  px-5 mt-5 sm:ml-5 py-4 bg-slate-300 flex-shrink">
+            <div className="sm:w-2/3  px-5 mt-5 sm:ml-5 py-4 bg-slate-300 flex-shrink">
                 <h3 className="font-bold text-2xl  " >About Us</h3>
                 <p className="mb-4">
                     FIT <span>S</span>TAR was conceptualized with the vision to

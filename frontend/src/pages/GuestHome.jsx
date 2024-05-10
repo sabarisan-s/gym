@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar/Navbar";
 import SlideImg from "../components/Section/SlideImg";
 import Features from "../components/Section/Features";
@@ -8,15 +8,20 @@ import OurPackage from "../components/Section/OurPackage";
 import Footer from "../components/Footer/Footer";
 
 const GuestHome = () => {
+    const [navActive, setNavActive] = useState(false);
+    useEffect(() => {
+        setNavActive(1);
+    }, []);
+
     return (
         <>
-            <Navbar />
+            <Navbar navActive={navActive} />
             <SlideImg />
             <Features />
             <HomeAbout />
-            <OurPackage />
+            <OurPackage navActive={navActive}/>
             <Discount />
-            <Footer/>
+            <Footer />
         </>
     );
 };

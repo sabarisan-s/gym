@@ -6,7 +6,7 @@ import WorkoutChartImg from "../../assets/img/WORKOUT CHART.jpg";
 import CrossFitImg from "../../assets/img/CROSSFIT.jpg";
 import DietCounselingImg from "../../assets/img/dietcounseling.jpg";
 import YogaImg from "../../assets/img/Yoga.jpg";
-const OurPackage = () => {
+const OurPackage = ({navActive}) => {
     const packageData = [
         {
             img: WeightLossImg,
@@ -45,8 +45,8 @@ const OurPackage = () => {
         },
     ];
     return <div >
-        <div className="" id="packages">
-            <div className="text-center text-5xl my-5 font-semibold">
+        <div className="my-5" id="packages">
+            <div className="text-center  text-5xl my-5 font-semibold">
                 <h3>Our Packages</h3>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 px-5">
@@ -58,7 +58,7 @@ const OurPackage = () => {
                     </div>
                     <h4 className="text-2xl font-bold my-3">{item.heading}</h4>
                     <p>{item.text}</p>
-                    <button className="bg-black my-3 transition-all duration-200 ease-in hover:scale-[1.1] text-white px-4 py-2 rounded-md">Book Now</button>
+                    <button className="bg-black my-3 transition-all duration-200 ease-in hover:scale-[1.1] text-white px-4 py-2 rounded-md "> <a href={navActive?'/login':'/booking'}>Book Now</a></button>
                 </div>
                 )}
             </div>

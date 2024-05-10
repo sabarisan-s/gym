@@ -9,12 +9,17 @@ import {
     FaTwitter,
 } from "react-icons/fa";
 
-const Footer = () => {
+const Footer = ({ homePage }) => {
     const quickLinks = [
-        { name: "Home" ,link:'/'},
-        { name: "Booking",link:'/booking' },
-        { name: "signUP",link:'/signup' },
-        { name: "Login",link:'/login' },
+        { name: "Home", link: "/" },
+        { name: "Booking", link: "/booking" },
+        { name: "signUP", link: "/signup" },
+        { name: "Login", link: "/login" },
+    ];
+    const homeQuickLinks = [
+        { name: "Home", link: "/home" },
+        { name: "Booking", link: "/booking" },
+        { name: "LogOut", link: "/logout" },
     ];
 
     const packageLinks = [
@@ -37,18 +42,31 @@ const Footer = () => {
                     <h3 className="text-xl text-white font-bold mb-3">
                         Quick Links
                     </h3>
-                    {quickLinks.map((item, i) => (
-                        <a
-                            href={item.link}
-                            key={i}
-                            className="flex items-center hover:scale-[1.1] transition-all duration-200  "
-                        >
-                            <div className="mx-2">
-                                <FaAngleRight className="text-red-600" />
-                            </div>
-                            <div className="">{item.name}</div>
-                        </a>
-                    ))}
+                    {homePage
+                        ? quickLinks.map((item, i) => (
+                              <a
+                                  href={item.link}
+                                  key={i}
+                                  className="flex items-center hover:scale-[1.1] transition-all duration-200  "
+                              >
+                                  <div className="mx-2">
+                                      <FaAngleRight className="text-red-600" />
+                                  </div>
+                                  <div className="">{item.name}</div>
+                              </a>
+                          ))
+                        : homeQuickLinks.map((item, i) => (
+                              <a
+                                  href={item.link}
+                                  key={i}
+                                  className="flex items-center hover:scale-[1.1] transition-all duration-200  "
+                              >
+                                  <div className="mx-2">
+                                      <FaAngleRight className="text-red-600" />
+                                  </div>
+                                  <div className="">{item.name}</div>
+                              </a>
+                          ))}
                 </div>
 
                 <div className=" my-3">
@@ -75,11 +93,7 @@ const Footer = () => {
                     </h3>
 
                     {timeLinks.map((item, i) => (
-                        <a
-                            href="#"
-                            key={i}
-                            className="flex items-center "
-                        >
+                        <a href="#" key={i} className="flex items-center ">
                             <div className="mx-2">
                                 <FaAngleRight className="text-red-600" />
                             </div>
@@ -98,38 +112,23 @@ const Footer = () => {
                         Contact Info
                     </h3>
                     <div className="flex flex-col">
-                        <div
-                            
-                            className="flex items-center cursor-pointer gap-2   "
-                        >
+                        <div className="flex items-center cursor-pointer gap-2   ">
                             <FaPhone className="mx-2 text-red-500" />
                             +91 98765-43210
                         </div>
-                        <div
-                            
-                            className="flex items-center cursor-pointer gap-2  "
-                        >
+                        <div className="flex items-center cursor-pointer gap-2  ">
                             <FaCompress className="mx-2 text-red-500" />
                             fitstar@gmail.com
                         </div>
-                        <div
-                            
-                            className="flex items-center cursor-pointer gap-2  "
-                        >
+                        <div className="flex items-center cursor-pointer gap-2  ">
                             <FaInstagram className="mx-2 text-red-500" />
                             Instagram
                         </div>
-                        <div
-                            
-                            className="flex items-center cursor-pointer gap-2  "
-                        >
+                        <div className="flex items-center cursor-pointer gap-2  ">
                             <FaTwitter className="mx-2 text-red-500" />{" "}
                             X-Twitter
                         </div>
-                        <div
-                            
-                            className="flex items-center cursor-pointer   gap-2"
-                        >
+                        <div className="flex items-center cursor-pointer   gap-2">
                             <FaLocationArrow className="mx-2 text-red-500" />
                             KK-Nagar,Chennai,India
                         </div>
